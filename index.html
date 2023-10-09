@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      .container {
+        margin-top: 30px;
+        color: white;
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+      .col-3 {
+        margin: 0px;
+        padding: 0px;
+      }
+      .digit button {
+        border: 1px solid white;
+        background-color: red;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        text-align: center;
+      }
+      .col-9 {
+        background-color: gray;
+        margin: 0px;
+        padding: 0px;
+        font-size: 30px;
+      }
+      .col-3 {
+        background-color: red;
+        font-size: 30px;
+        font-weight: 2rem;
+      }
+      #AC button {
+        background-color: blue;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        text-align: center;
+      }
+      .operation button {
+        background-color: gray;
+        border: 1px solid white;
+
+        padding-top: 30px;
+        padding-bottom: 30px;
+        text-align: center;
+      }
+      h3 {
+        text-align: center;
+        background-color: black;
+        color: white;
+        padding: 20px;
+      }
+    </style>
+
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="row"><h3>Calculator</h3></div>
+        <div class="row">
+          <div class="col-9">
+            <input
+              type="text"
+              id="result"
+              readonly
+              style="width: 100%; height: 100%"
+            />
+          </div>
+          <div class="col-3" id="AC">
+            <button style="width: 100%; height: 100%" onClick="toClear()">
+              AC
+            </button>
+          </div>
+        </div>
+        <!--second row-->
+        <div class="row">
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('9')">
+              9
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('8')">
+              8
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('7')">
+              7
+            </button>
+          </div>
+          <div class="col-3 operation">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('+')">
+              +
+            </button>
+          </div>
+        </div>
+        <!--third row-->
+        <div class="row">
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('4')">
+              4
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('5')">
+              5
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('6')">
+              6
+            </button>
+          </div>
+          <div class="col-3 operation">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('-')">
+              -
+            </button>
+          </div>
+        </div>
+        <!--fourth row-->
+        <div class="row">
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('1')">
+              1
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('2')">
+              2
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('3')">
+              3
+            </button>
+          </div>
+          <div class="col-3 operation">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('/')">
+              /
+            </button>
+          </div>
+        </div>
+        <!--fifth row-->
+        <div class="row">
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('.')">
+              .
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('0')">
+              0
+            </button>
+          </div>
+          <div class="col-3 digit">
+            <button style="width: 100%; height: 100%" onCLick="toGetResult()">
+              =
+            </button>
+          </div>
+          <div class="col-3 operation">
+            <button style="width: 100%; height: 100%" onCLick="toAppend('X')">
+              X
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script>
+      function toAppend(para) {
+        document.getElementById("result").value += para;
+      }
+      function toGetResult() {
+        const result = eval(document.getElementById("result").value);
+        document.getElementById("result").value = result;
+      }
+      function toClear() {
+        document.getElementById("result").value = "";
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
