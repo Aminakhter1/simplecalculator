@@ -75,7 +75,7 @@
           <div class="col-9">
             <input
               type="text"
-              id="result"
+              id="display"
               readonly
               style="width: 100%; height: 100%"
             />
@@ -181,18 +181,70 @@
       </div>
     </div>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    
     <script>
-      function toAppend(para) {
-        document.getElementById("result").value += para;
+      let displayValue = "";
+
+      function toAppend(value) {
+        displayValue += value;
+        document.getElementById("display").value = displayValue;
       }
-      function toGetResult() {
-        const result = eval(document.getElementById("result").value);
-        document.getElementById("result").value = result;
-      }
+
       function toClear() {
-        document.getElementById("result").value = "";
+        displayValue = "";
+        document.getElementById("display").value = "";
       }
+
+      function toGetResult() {
+        try {
+          const result = evaluateExpression(displayValue);
+          displayValue = result.toString();
+          document.getElementById("display").value = displayValue;
+        } catch (error) {
+          displayValue = "";
+          document.getElementById("display").value = "Error";
+        }
+      }
+
+      function evaluateExpression(expression) {
+        let tokens = expression.split(/(\+|\-|\*|\/)/);
+        let numbers = [];
+        let operators = [];
+
+        tokens = tokens.map(function (token) {
+          return token.trim();
+        });
+
+        for (let i = 0; i < tokens.length; i++) {
+          let token = tokens[i];
+          if (!isNaN(token)) {
+            numbers.push(parseFloat(token));
+          } else if (["+", "-", "*", "/"].includes(token)) {
+            operators.push(token);
+          }
+        }
+        let result = numbers[0];
+        for (let i = 0; i < operators.length; i++) {
+          const num = numbers[i + 1];
+          const operator = operators[i];
+
+          if (operator === "+") {
+            result += num;
+          } else if (operator === "-") {
+            result -= num;
+          } else if (operator === "*") {
+            result *= num;
+          } else if (operator === "/") {
+            if (num === 0) {
+              throw new Error("Division by zero");
+            }
+            result /= num;
+          }
+        }
+
+        return result;
+      } 
+     
     </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
